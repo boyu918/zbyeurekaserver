@@ -1,0 +1,17 @@
+server:
+  port: 4446
+eureka:
+  server:
+    enable-self-preservation: true #eureka自我保护机制 当server端短时间内失去过多客户端时，这个节点进入自我保护模式，不注销任何微服务
+  client:
+    fetch-registry: true   #表示自己就是注册中心，并不会去检索服务
+    register-with-eureka: true  #表示不像注册中心注册自己
+    service-url:
+      defaultZone: http://zby-eureka-server1:4445/eureka #指定服务注册中心的位置
+  instance:
+    hostname: zby-eureka-server2  #服务中心主机名字
+    lease-expiration-duration-in-seconds: 90 #client心跳超时后将移除instance
+    lease-renewal-interval-in-seconds: 30 #clinet发送给server的心跳频率
+spring:
+  application:
+    name: eureka-server
